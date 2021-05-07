@@ -1,14 +1,29 @@
+// 
+//  Bachelor of Software Engineering 
+//  Media Design School 
+//  Auckland 
+//  New Zealand 
+// 
+//  (c) 2021 Media Design School 
+// 
+//  File Name   :   prismatic.cpp
+//  Description :   Box2D prismatic rail object.
+//  Author      :   William de Beer
+//  Mail        :   William.Beer@mds.ac.nz
+// 
+ // This Include 
 #include "prismatic.h"
-
+ // Implementation
 prismatic::prismatic(b2Vec2 _pos, sf::Vector2f _scale, sf::Texture* _texture, sf::Texture* _railTexture, b2World* _world, bool _destructable)
 {
+	// Grounded static object
 	m_Ground = new gameObject(b2Vec2(0.0f,0.0f), sf::Vector2f(0.5f, 0.5f), 0.0f, _texture, b2_staticBody, _world, 1, false);
+	// Object on slider
 	m_Object = new gameObject(_pos, _scale * 1.0f, 0.0f, _texture, b2_dynamicBody, _world, 2, false);
 	m_Object->SetLethal(true);
 
+	// Create joint
 	b2PrismaticJointDef pjd;
-
-	// Horizontal
 	pjd.Initialize(m_Ground->GetBody(), m_Object->GetBody(), m_Object->GetBody()->GetPosition(), b2Vec2(1.0f, 0.0f));
 
 	pjd.maxMotorForce = 10000.0f;
@@ -43,12 +58,22 @@ prismatic::~prismatic()
 	}
 }
 
+/***********************
+* Update: Update objects.
+* @author: William de Beer
+* @parameter: Delta time
+********************/
 void prismatic::Update(float _dT)
 {
 	m_Object->Update(_dT);
 	m_Ground->Update(_dT);
 }
 
+/***********************
+* Draw: Draw objects.
+* @author: William de Beer
+* @parameter: Reference to render window.
+********************/
 void prismatic::Draw(sf::RenderWindow& _window)
 {
 	_window.draw(*m_Rail);

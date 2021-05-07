@@ -1,8 +1,21 @@
 #ifndef __CHAIN_H__
 #define __CHAIN_H__
-
+// 
+//  Bachelor of Software Engineering 
+//  Media Design School 
+//  Auckland 
+//  New Zealand 
+// 
+//  (c) 2021 Media Design School 
+// 
+//  File Name   :   Chain.h
+//  Description :   Box2D chain.
+//  Author      :   William de Beer
+//  Mail        :   William.Beer@mds.ac.nz
+// 
+ // Local Includes 
 #include "gameObject.h"
-
+ // Implementation 
 class Chain
 {
 public:

@@ -1,7 +1,21 @@
 #ifndef __BIRD_H__
 #define __BIRD_H__
+// 
+//  Bachelor of Software Engineering 
+//  Media Design School 
+//  Auckland 
+//  New Zealand 
+// 
+//  (c) 2021 Media Design School 
+// 
+//  File Name   :   bird.h
+//  Description :   Class for basic bird object and parent to other types of bird objects.
+//  Author      :   William de Beer
+//  Mail        :   William.Beer@mds.ac.nz
+// 
+ // Local Includes 
 #include "gameObject.h"
-
+ // Implementation 
 class bird : public gameObject
 {
 public:

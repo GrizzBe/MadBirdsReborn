@@ -1,9 +1,23 @@
 #ifndef __MENU_SCENE_H__
 #define __MENU_SCENE_H__
-
+// 
+//  Bachelor of Software Engineering 
+//  Media Design School 
+//  Auckland 
+//  New Zealand 
+// 
+//  (c) 2021 Media Design School 
+// 
+//  File Name   :   menuScene.h
+//  Description :   Menu scene containing buttons to select levels and quit game.
+//  Author      :   William de Beer
+//  Mail        :   William.Beer@mds.ac.nz
+// 
+ // Library Includes 
 #include <SFML/Graphics.hpp>
+ // Local Includes 
 #include "button.h"
-
+ // Implementation 
 class menuScene
 {
 public:

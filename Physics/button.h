@@ -1,11 +1,25 @@
 #ifndef __BUTTON_H__
 #define __BUTTON_H__
-
-#include "scene1.h"
-#include "scene2.h"
+// 
+//  Bachelor of Software Engineering 
+//  Media Design School 
+//  Auckland 
+//  New Zealand 
+// 
+//  (c) 2021 Media Design School 
+// 
+//  File Name   :   button.h
+//  Description :   Button which can be clicked on to call a function.
+//  Author      :   William de Beer
+//  Mail        :   William.Beer@mds.ac.nz
+// 
+ // Library Includes 
 #include <SFML/Graphics.hpp>
 #include <iostream>
-
+ // Local Includes 
+#include "scene1.h"
+#include "scene2.h"
+ // Implementation 
 enum class buttonFunction
 {
 	quitGame,

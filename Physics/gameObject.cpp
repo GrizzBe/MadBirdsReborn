@@ -1,10 +1,26 @@
-#include "gameObject.h"
+// 
+//  Bachelor of Software Engineering 
+//  Media Design School 
+//  Auckland 
+//  New Zealand 
+// 
+//  (c) 2021 Media Design School 
+// 
+//  File Name   :   gameObject.cpp
+//  Description :   Class for all box2D gameobjects including blocks and birds.
+//  Author      :   William de Beer
+//  Mail        :   William.Beer@mds.ac.nz
+// 
+ // Library Includes 
 #include <iostream>
-
+ // This Include 
+#include "gameObject.h"
+ // Implementation 
 gameObject::gameObject(b2Vec2 _pos, sf::Vector2f _scale, float _rotation, sf::Texture* _texture, b2BodyType _bodyType, b2World* _world, int _shape, bool _destructable)
 {
 	m_bLethal = false;
 	m_FixtureDef = 0;
+	// Set durability
 	m_MaxDurability = 10.0f;
 	m_Durability = m_MaxDurability;
 
@@ -12,12 +28,14 @@ gameObject::gameObject(b2Vec2 _pos, sf::Vector2f _scale, float _rotation, sf::Te
 	m_StoredVelocity.x = 0;
 	m_StoredVelocity.y= 0;
 
+	// Create sprite
 	m_Sprite = new sf::Sprite(*_texture);
 	m_Sprite->setPosition(_pos.x * Utilities::PPM, _pos.y * Utilities::PPM);
 	m_Sprite->setScale(_scale.x * 32.0f / _texture->getSize().x, _scale.y * 32.0f / _texture->getSize().y);
 	m_Sprite->setOrigin(_texture->getSize().x / 2, _texture->getSize().y / 2);
 	m_Sprite->setRotation(_rotation);
 	
+	// Create body
 	m_BodyDef = new b2BodyDef();
 	m_BodyDef->type = _bodyType;
 	m_BodyDef->position.Set(_pos.x, _pos.y);
@@ -26,7 +44,7 @@ gameObject::gameObject(b2Vec2 _pos, sf::Vector2f _scale, float _rotation, sf::Te
 	m_BodyDef->userData.pointer = reinterpret_cast<uintptr_t>(this);
 
 	m_Body = _world->CreateBody(m_BodyDef);
-
+	// Create fixture def
 	if (_shape == 1)
 	{
 		b2PolygonShape newBox;
@@ -57,8 +75,8 @@ gameObject::gameObject(b2Vec2 _pos, sf::Vector2f _scale, float _rotation, sf::Te
 
 		m_Body->CreateFixture(m_FixtureDef);
 	}
+	// Save world
 	m_World = _world;
-
 }
 
 gameObject::~gameObject()
@@ -85,6 +103,11 @@ gameObject::~gameObject()
 	}
 }
 
+/***********************
+* Update: Updates sprite positions.
+* @author: William de Beer
+* @parameter: Delta time
+********************/
 void gameObject::Update(float _dT)
 {
 	b2Vec2 pos = m_Body->GetPosition();
@@ -93,31 +116,62 @@ void gameObject::Update(float _dT)
 	m_Sprite->setRotation(rot);
 }
 
+/***********************
+* IsDestructable: Returns whether object is destructable.
+* @author: William de Beer
+* @return: Boolean
+********************/
 bool gameObject::IsDestructable()
 {
 	return m_bDestructable;
 }
 
+/***********************
+* GetDurability: Returns remaining durability of object.
+* @author: William de Beer
+* @return: Durability float.
+********************/
 float gameObject::GetDurability()
 {
 	return m_Durability;
 }
 
+/***********************
+* SetDurability: Sets the durability of object.
+* @author: William de Beer
+* @parameter: Float durability
+********************/
 void gameObject::SetDurability(float _durability)
 {
 	m_Durability = _durability;
 }
 
+/***********************
+* GetSprite: Returns object sprite.
+* @author: William de Beer
+* @return: Pointer to sprite
+********************/
 sf::Sprite* gameObject::GetSprite()
 {
 	return m_Sprite;
 }
 
+/***********************
+* GetBody: Returns object body.
+* @author: William de Beer
+* @return: Pointer to body
+********************/
 b2Body* gameObject::GetBody()
 {
 	return m_Body;
 }
 
+/***********************
+* GetMouseColliding: Checks if mouse is in radius.
+* @author: William de Beer
+* @parameter: Reference to render window
+* @return: Boolean
+********************/
 bool gameObject::GetMouseColliding(sf::RenderWindow& _window)
 {
 	sf::Vector2i mousePos = sf::Mouse::getPosition(_window);

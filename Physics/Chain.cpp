@@ -1,7 +1,24 @@
-#include "Chain.h"
+// 
+//  Bachelor of Software Engineering 
+//  Media Design School 
+//  Auckland 
+//  New Zealand 
+// 
+//  (c) 2021 Media Design School 
+// 
+//  File Name   :   Chain.cpp
+//  Description :   Box2D chain.
+//  Author      :   William de Beer
+//  Mail        :   William.Beer@mds.ac.nz
+// 
+ // Library Includes 
 #include <iostream>
+ // This Include 
+#include "Chain.h"
+ // Implementation 
 Chain::Chain(b2Vec2 _pos, sf::Vector2f _scale, sf::Texture* _texture, b2World* _world, bool _destructable)
 {
+    // Create chain base
     gameObject* chainBase = new gameObject(_pos, _scale, 0.0f, _texture, b2_staticBody, _world, 2, false);
     m_ChainLinks.push_back(chainBase);
 
@@ -10,7 +27,7 @@ Chain::Chain(b2Vec2 _pos, sf::Vector2f _scale, sf::Texture* _texture, b2World* _
 
     b2Body* prevBody = chainBase->GetBody();
 
-    for (int i = 1; i < 15; ++i)
+    for (int i = 1; i < 15; ++i) // Add chain link to chain vector.
     {
         gameObject* newChain = new gameObject(b2Vec2(_pos.x, _pos.y + i * 0.8f), _scale, 0.0f, _texture, b2_dynamicBody, _world, 2, false);
         m_ChainLinks.push_back(newChain);
@@ -22,7 +39,6 @@ Chain::Chain(b2Vec2 _pos, sf::Vector2f _scale, sf::Texture* _texture, b2World* _
 
         prevBody = body;
     }
-
 }
 
 Chain::~Chain()
@@ -36,6 +52,11 @@ Chain::~Chain()
     }
 }
 
+/***********************
+* Update: Update chain links.
+* @author: William de Beer
+* @parameter: Delta time
+********************/
 void Chain::Update(float _dT)
 {
     for (auto i : m_ChainLinks)
@@ -44,6 +65,11 @@ void Chain::Update(float _dT)
     }
 }
 
+/***********************
+* Draw: Draw chain links.
+* @author: William de Beer
+* @parameter: Reference to render window.
+********************/
 void Chain::Draw(sf::RenderWindow& _window)
 {
     for (auto i : m_ChainLinks)

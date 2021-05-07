@@ -1,6 +1,23 @@
-#include "gameWorld.h"
-#include "gameObject.h"
+// 
+//  Bachelor of Software Engineering 
+//  Media Design School 
+//  Auckland 
+//  New Zealand 
+// 
+//  (c) 2021 Media Design School 
+// 
+//  File Name   :   gameWorld.cpp
+//  Description :   Parent to all game scenes.
+//  Author      :   William de Beer
+//  Mail        :   William.Beer@mds.ac.nz
+// 
+ // Library Includes 
 #include <iostream>
+ // Local Includes 
+#include "gameObject.h"
+ // This Include 
+#include "gameWorld.h"
+ // Implementation 
 gameWorld::gameWorld()
 {
     m_contactList = 0;
@@ -13,21 +30,31 @@ gameWorld::gameWorld()
     m_BirdTexture = 0;
     m_BirdTireTexture = 0;
     m_BirdSpinTexture = 0;
+    m_BirdQueTexture = 0;
+    m_BirdQueTexture2 = 0;
+
     m_VictimTexture = 0;
     m_VictimTexture2 = 0;
 
     m_StrongBlockTexture = 0;
     m_WeakBlockTexture = 0;
+
     m_SeesawTexture = 0;
     m_ChainTexture = 0;
-    m_ArrowTexture = 0;
+    m_RailTexture = 0;
+    m_WeightTexture = 0;
 
-    //m_World = 0;
+    m_ArrowTexture = 0;
     m_AimingArrow = 0;
+
+    m_Chain1 = 0;
+    m_Seesaw1 = 0;
+    m_Prismatic1 = 0;
 }
 
 gameWorld::~gameWorld()
 {
+    // Delete all textures and sprites
     if (m_BirdTexture != nullptr)
     {
         delete m_BirdTexture;
@@ -105,6 +132,11 @@ gameWorld::~gameWorld()
     }
 }
 
+/***********************
+* MainLoop: Main loop which calls render and update functions.
+* @author: William de Beer
+* @parameter: Reference to render window
+********************/
 void gameWorld::MainLoop(sf::RenderWindow& _window)
 {
     float timeStep = 1.0f / 60.0f;
@@ -114,17 +146,20 @@ void gameWorld::MainLoop(sf::RenderWindow& _window)
     LoadTextures();
     b2World m_World(b2Vec2(0.0f, 9.81f));
 
+    // Set contact listener
     m_contactList = new ContactListener();
     m_World.SetContactListener(m_contactList);
 
     m_AimingArrow = new sf::Sprite(*m_ArrowTexture);
 
+    // Generate level
     GenerateLevel(m_World);
     
     sf::Clock clock;
     float LevelEndTimer = 0;
     while (_window.isOpen() && !sf::Keyboard::isKeyPressed(sf::Keyboard::Q))
     {
+        // Delta time update
         float deltaTime = clock.getElapsedTime().asSeconds();
         clock.restart();
 
@@ -142,16 +177,21 @@ void gameWorld::MainLoop(sf::RenderWindow& _window)
     }
     DestroyBox2DObjects();
 }
-    
 
+/***********************
+* Update: Call updates for all game objects in world.
+* @author: William de Beer
+* @parameter: Delta time
+********************/
 void gameWorld::Update(float _dT)
 {
+    // Update blocks
     std::vector<gameObject*>::iterator bl_it = m_Blocks.begin();
     while (bl_it != m_Blocks.end())
     {
         (*bl_it)->Update(_dT);
 
-        if ((*bl_it)->GetDurability() <= 0.0f && (*bl_it)->IsDestructable())
+        if ((*bl_it)->GetDurability() <= 0.0f && (*bl_it)->IsDestructable()) // Check if block is to be destroyed.
         {
             // Delete vector contents
             delete* bl_it;
@@ -163,12 +203,13 @@ void gameWorld::Update(float _dT)
         }
     }
 
+    // Update victims
     std::vector<victim*>::iterator v_it = m_Victims.begin();
     while (v_it != m_Victims.end())
     {
         (*v_it)->Update(_dT);
 
-        if ((*v_it)->GetDurability() <= 0.0f && (*v_it)->IsDestructable())
+        if ((*v_it)->GetDurability() <= 0.0f && (*v_it)->IsDestructable()) // Check if block is to be destroyed.
         {
             // Delete vector contents
             delete* v_it;
@@ -180,20 +221,51 @@ void gameWorld::Update(float _dT)
         }
     }
 
+    // Update birds
     for (auto i : m_Birds)
     {
         i->Update(_dT);
     }
+
+    // Update joint objects
+    if (m_Seesaw1 != nullptr)
+        m_Seesaw1->Update(_dT);
+
+    if (m_Chain1 != nullptr)
+        m_Chain1->Update(_dT);
+
+    if (m_Prismatic1 != nullptr)
+        m_Prismatic1->Update(_dT);
 }
 
+/***********************
+* Render: Render all game objects in world.
+* @author: William de Beer
+* @parameter: Reference to render window
+********************/
 void gameWorld::Render(sf::RenderWindow& _window)
 {
+    _window.clear(sf::Color(228, 228, 228));
+
+    // Draw joints
+    if (m_Seesaw1 != nullptr)
+        m_Seesaw1->Draw(_window);
+
+    if (m_Chain1 != nullptr)
+        m_Chain1->Draw(_window);
+
+    if (m_Prismatic1 != nullptr)
+        m_Prismatic1->Draw(_window);
+
+    // Draw blocks
     for (auto i : m_Blocks)
     {
         _window.draw(*i->GetSprite());
     }
+    // Draw birds
     for (auto i : m_Birds)
     {
+        // Draw outline around selected bird.
         if (i == m_SelectedBird)
         {
             sf::CircleShape selectedOutline;
@@ -206,16 +278,23 @@ void gameWorld::Render(sf::RenderWindow& _window)
         }
         _window.draw(*i->GetSprite());
     }
+    // Draw victims
     for (auto i : m_Victims)
     {
         _window.draw(*i->GetSprite());
     }
+    // Draw aiming arrow
     if (m_bPullFlag)
     {
         _window.draw(*m_AimingArrow);
     }
+    _window.display();
 }
 
+/***********************
+* LoadTextures: Loads all texture use in world from files.
+* @author: William de Beer
+********************/
 void gameWorld::LoadTextures()
 {
     m_BirdTexture = new sf::Texture();
@@ -303,13 +382,21 @@ void gameWorld::LoadTextures()
     }
 }
 
+/***********************
+* AddBird: Adds bird into scene.
+* @author: William de Beer
+* @parameter: Bird type, reference to world.
+********************/
 void gameWorld::AddBird(birdType _type, b2World& _world)
 {
+    // Offset constant
     float xBirdOffset = 1.75f;
     float yBirdOffset = 17.5f;
 
+    // Set spawn position based on how many birds are already in scene
     b2Vec2 spawnPos(xBirdOffset + m_Birds.size() * 1.5f, yBirdOffset);
 
+    // Spawn bird
     switch (_type)
     {
     case birdType::basicBird:
@@ -330,8 +417,28 @@ void gameWorld::AddBird(birdType _type, b2World& _world)
     }
 }
 
+/***********************
+* DestroyBox2DObjects: Destroys all box2D objects, called before deconstructor.
+* @author: William de Beer
+********************/
 void gameWorld::DestroyBox2DObjects()
 {
+    if (m_Chain1 != nullptr)
+    {
+        delete m_Chain1;
+        m_Chain1 = 0;
+    }
+    if (m_Seesaw1 != nullptr)
+    {
+        delete m_Seesaw1;
+        m_Seesaw1 = 0;
+    }
+    if (m_Prismatic1 != nullptr)
+    {
+        delete m_Prismatic1;
+        m_Prismatic1 = 0;
+    }
+
     std::vector<bird*>::iterator b_it = m_Birds.begin();
     while (b_it != m_Birds.end())
     {
@@ -366,21 +473,25 @@ void gameWorld::DestroyBox2DObjects()
     }
 }
 
-
+/***********************
+* LaunchBird: Logic for launching bird.
+* @author: William de Beer
+* @parameter: Reference to render window.
+********************/
 void gameWorld::LaunchBird(sf::RenderWindow& _window)
 {
-    if (m_SelectedBird != nullptr)
+    if (m_SelectedBird != nullptr) // Check if bird is selected
     {
+        // Check if mouse is colliding with bird.
         bool mouseColliding = m_SelectedBird->GetMouseColliding(_window);
 
-        sf::VertexArray lines(sf::LinesStrip, 2);
-
-        // General bird update
+        // Start power selection
         if (sf::Mouse::isButtonPressed(sf::Mouse::Left) && !m_bPullFlag && mouseColliding)
         {
             m_SelectedBird->SetHasLaunched(false);
             m_bPullFlag = true;
         }
+        // Update arrow
         if (sf::Mouse::isButtonPressed(sf::Mouse::Left) && m_bPullFlag)
         {
             m_DragOrigin = (sf::Vector2i)m_SelectedBird->GetSprite()->getPosition();
@@ -404,6 +515,7 @@ void gameWorld::LaunchBird(sf::RenderWindow& _window)
                 m_AimingArrow->getTexture()->getSize().y * m_AimingArrow->getScale().y + 10.0f);
         }
 
+        // Hover highlight
 		if (mouseColliding || m_bPullFlag)
 		{
 			m_SelectedBird->GetSprite()->setColor(sf::Color(128, 128, 128));
@@ -415,11 +527,13 @@ void gameWorld::LaunchBird(sf::RenderWindow& _window)
 
         if (!sf::Mouse::isButtonPressed(sf::Mouse::Left) && m_bPullFlag)
         {
+            // Launch bird
             m_SelectedBird->SetHasLaunched(true);
             m_SelectedBird->GetBody()->ApplyForceToCenter(-CalculateForce(_window), true);
             m_bPullFlag = false;
 			m_SelectedBird->GetSprite()->setColor(sf::Color(255, 255, 255));
 
+            // Go next bird
 			m_it++;
 			if (m_it != m_Birds.end())
 				m_SelectedBird = *m_it;
@@ -429,15 +543,22 @@ void gameWorld::LaunchBird(sf::RenderWindow& _window)
     }
 }
 
+/***********************
+* CalculateForce: Description.
+* @author: William de Beer
+* @parameter: Reference to render window
+* @return: 2D vector
+********************/
 b2Vec2 gameWorld::CalculateForce(sf::RenderWindow& _window)
 {
     sf::Vector2i mousePosition = sf::Mouse::getPosition(_window);
-    sf::Vector2i positionDifference = sf::Mouse::getPosition(_window) - m_DragOrigin;
+    sf::Vector2i positionDifference = sf::Mouse::getPosition(_window) - m_DragOrigin; // Get direction and difference of positions 
 
+    // Create force vector from position difference
     b2Vec2 forceVec(positionDifference.x * m_fForceMult, positionDifference.y * m_fForceMult);
     float forceMag = sqrtf(powf(forceVec.x, 2) + powf(forceVec.y, 2));
 
-    if (forceMag > m_fForceMax)
+    if (forceMag > m_fForceMax) // Clamp
     {
         forceVec.x = (forceVec.x * m_fForceMax) / forceMag;
         forceVec.y = (forceVec.y * m_fForceMax) / forceMag;
@@ -446,10 +567,17 @@ b2Vec2 gameWorld::CalculateForce(sf::RenderWindow& _window)
     return forceVec;
 }
 
+/***********************
+* GenerateLevel: Places scene objects and birds.
+* @author: William de Beer
+* @parameter: Reference to world.
+********************/
 void gameWorld::GenerateLevel(b2World& _world)
 {
+    // Check if a bird exists
     if (!m_Birds.empty())
     {
+        // Select first bird
         m_it = m_Birds.begin();
         m_SelectedBird = *m_it;
     }
@@ -458,6 +586,7 @@ void gameWorld::GenerateLevel(b2World& _world)
         std::cout << "No birds in scene" << std::endl;
     }
 
+    // Create scene bounds
     m_Blocks.push_back(new gameObject(b2Vec2(20.0f, 25.0f), sf::Vector2f(40.0f, 2.0f), 0.0f, m_StrongBlockTexture, b2_staticBody, &_world, 1, false));
     m_Blocks.push_back(new gameObject(b2Vec2(0.0f, 13.2f), sf::Vector2f(2.0f, 40.0f), 0.0f, m_StrongBlockTexture, b2_staticBody, &_world, 1, false));
     m_Blocks.push_back(new gameObject(b2Vec2(37.5f, 13.2f), sf::Vector2f(2.0f, 40.0f), 0.0f, m_StrongBlockTexture, b2_staticBody, &_world, 1, false));
@@ -468,6 +597,7 @@ void gameWorld::GenerateLevel(b2World& _world)
     int birdCount = m_Birds.size();
     float yStepsOffset = 23.5f - birdCount;
 
+    // Create stairs for birds.
     for (int i = 1; i < birdCount + 1; i++)
     {
         m_Blocks.push_back(new gameObject(b2Vec2(xStepsOffset + 0.75f * i, yStepsOffset + i), sf::Vector2f(i * 1.5f, 1.0f), 0.0f, m_WeakBlockTexture, b2_staticBody, &_world, 1, false));

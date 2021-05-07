@@ -20,7 +20,6 @@
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="bird.cpp" />
-    <ClCompile Include="birdBasic.cpp" />
     <ClCompile Include="birdQue.cpp" />
     <ClCompile Include="birdSpin.cpp" />
     <ClCompile Include="birdTire.cpp" />
@@ -32,15 +31,12 @@
     <ClCompile Include="main.cpp" />
     <ClCompile Include="menuScene.cpp" />
     <ClCompile Include="prismatic.cpp" />
-    <ClCompile Include="scene1.cpp" />
-    <ClCompile Include="scene2.cpp" />
     <ClCompile Include="seesaw.cpp" />
     <ClCompile Include="Utilities.cpp" />
     <ClCompile Include="victim.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="bird.h" />
-    <ClInclude Include="birdBasic.h" />
     <ClInclude Include="birdQue.h" />
     <ClInclude Include="birdSpin.h" />
     <ClInclude Include="birdTire.h" />

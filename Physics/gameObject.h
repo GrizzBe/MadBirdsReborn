@@ -1,10 +1,24 @@
 #ifndef __GAME_OBJECT_H__
 #define __GAME_OBJECT_H__
-
+// 
+//  Bachelor of Software Engineering 
+//  Media Design School 
+//  Auckland 
+//  New Zealand 
+// 
+//  (c) 2021 Media Design School 
+// 
+//  File Name   :   gameObject.h
+//  Description :   Class for all box2D gameobjects including blocks and birds.
+//  Author      :   William de Beer
+//  Mail        :   William.Beer@mds.ac.nz
+// 
+ // Library Includes 
 #include <SFML/Graphics.hpp>
 #include <box2d.h>
+ // Local Includes 
 #include "Utilities.h"
-
+ // Implementation 
 struct GameObjectData {
 	float durability = 100.0f;
 };

@@ -1,40 +1,13 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <ItemGroup>
-    <ClCompile Include="bird.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="birdBasic.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="birdQue.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="birdSpin.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="birdTire.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="Chain.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
     <ClCompile Include="ContactListener.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="gameObject.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="gameWorld.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
     <ClCompile Include="main.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="scene1.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="scene2.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="Utilities.cpp">
@@ -43,17 +16,35 @@
     <ClCompile Include="victim.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="menuScene.cpp">
-      <Filter>Source Files</Filter>
+    <ClCompile Include="bird.cpp">
+      <Filter>Source Files\birds</Filter>
+    </ClCompile>
+    <ClCompile Include="birdQue.cpp">
+      <Filter>Source Files\birds</Filter>
+    </ClCompile>
+    <ClCompile Include="birdSpin.cpp">
+      <Filter>Source Files\birds</Filter>
+    </ClCompile>
+    <ClCompile Include="birdTire.cpp">
+      <Filter>Source Files\birds</Filter>
     </ClCompile>
     <ClCompile Include="button.cpp">
-      <Filter>Source Files</Filter>
+      <Filter>Source Files\menu</Filter>
     </ClCompile>
-    <ClCompile Include="seesaw.cpp">
-      <Filter>Source Files</Filter>
+    <ClCompile Include="menuScene.cpp">
+      <Filter>Source Files\menu</Filter>
+    </ClCompile>
+    <ClCompile Include="gameWorld.cpp">
+      <Filter>Source Files\levels</Filter>
+    </ClCompile>
+    <ClCompile Include="Chain.cpp">
+      <Filter>Source Files\joints</Filter>
     </ClCompile>
     <ClCompile Include="prismatic.cpp">
-      <Filter>Source Files</Filter>
+      <Filter>Source Files\joints</Filter>
+    </ClCompile>
+    <ClCompile Include="seesaw.cpp">
+      <Filter>Source Files\joints</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -70,9 +61,6 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="bird.h">
-      <Filter>Header Files\birds</Filter>
-    </ClInclude>
-    <ClInclude Include="birdBasic.h">
       <Filter>Header Files\birds</Filter>
     </ClInclude>
     <ClInclude Include="birdQue.h">
@@ -127,6 +115,18 @@
     </Filter>
     <Filter Include="Header Files\levels">
       <UniqueIdentifier>{eb41e32a-e9bc-4433-a8cc-cd8707fd8a5d}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\birds">
+      <UniqueIdentifier>{69c2f057-5765-404d-b676-72d9387420f2}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\joints">
+      <UniqueIdentifier>{6e7be653-391f-4a19-9a7b-91c9846e256b}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\levels">
+      <UniqueIdentifier>{93eadf98-4f82-4e1a-a50b-47dc73a98e9a}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\menu">
+      <UniqueIdentifier>{74d40c18-6cb3-4782-8221-a42a48eae795}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
 </Project>

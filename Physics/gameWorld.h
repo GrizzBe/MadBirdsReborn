@@ -1,23 +1,34 @@
 #ifndef __GAME_WORLD_H__
 #define __GAME_WORLD_H__
-
-#include "gameObject.h"
-
+// 
+//  Bachelor of Software Engineering 
+//  Media Design School 
+//  Auckland 
+//  New Zealand 
+// 
+//  (c) 2021 Media Design School 
+// 
+//  File Name   :   gameWorld.h
+//  Description :   Parent to all game scenes.
+//  Author      :   William de Beer
+//  Mail        :   William.Beer@mds.ac.nz
+// 
+ // Library Includes 
 #include <SFML/Graphics.hpp>
 #include <box2d.h>
 #include <vector>
+ // Local Includes 
 #include "ContactListener.h"
-
+#include "gameObject.h"
 #include "bird.h"
 #include "birdTire.h"
 #include "birdSpin.h"
 #include "birdQue.h"
-
 #include "Chain.h"
 #include "seesaw.h"
 #include "prismatic.h"
 #include "victim.h"
-
+ // Implementation 
 enum class birdType
 {
 	basicBird,
@@ -51,15 +62,20 @@ protected:
 	float m_fForceMult;
 	float m_fForceMax;
 
-
-
 	ContactListener* m_contactList;
 
-	std::vector<bird*>::iterator m_it;
+	std::vector<bird*>::iterator m_it; // Keeps track of selected bird
+	bird* m_SelectedBird;
+
+	// Object vectors
 	std::vector<bird*> m_Birds;
 	std::vector<victim*> m_Victims;
 	std::vector<gameObject*> m_Blocks;
-	bird* m_SelectedBird;
+
+	// Joint objects
+	Chain* m_Chain1;
+	seesaw* m_Seesaw1;
+	prismatic* m_Prismatic1;
 
 	// Textures
 	sf::Texture* m_BirdTexture;
@@ -81,8 +97,6 @@ protected:
 	sf::Texture* m_ChainTexture;
 
 	sf::Texture* m_ArrowTexture;
-
-
 };
 
 #endif

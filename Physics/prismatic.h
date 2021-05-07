@@ -1,8 +1,21 @@
 #ifndef __PRISMATIC_H__
 #define __PRISMATIC_H__
-
+// 
+//  Bachelor of Software Engineering 
+//  Media Design School 
+//  Auckland 
+//  New Zealand 
+// 
+//  (c) 2021 Media Design School 
+// 
+//  File Name   :   prismatic.h
+//  Description :   Box2D prismatic rail object.
+//  Author      :   William de Beer
+//  Mail        :   William.Beer@mds.ac.nz
+// 
+ // Local Includes 
 #include "gameObject.h"
-
+ // Implementation 
 class prismatic
 {
 public:

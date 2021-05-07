@@ -1,6 +1,21 @@
-#include "menuScene.h"
+// 
+//  Bachelor of Software Engineering 
+//  Media Design School 
+//  Auckland 
+//  New Zealand 
+// 
+//  (c) 2021 Media Design School 
+// 
+//  File Name   :   menuScene.cpp
+//  Description :   Menu scene containing buttons to select levels and quit game.
+//  Author      :   William de Beer
+//  Mail        :   William.Beer@mds.ac.nz
+// 
+ // Library Includes 
 #include <iostream>
-
+ // This Include 
+#include "menuScene.h"
+ // Implementation 
 menuScene::menuScene()
 {
     m_MenuBGTexture  = 0;
@@ -60,6 +75,11 @@ menuScene::~menuScene()
     m_Buttons.clear();
 }
 
+/***********************
+* MainLoop: Main loop which calls render and update functions.
+* @author: William de Beer
+* @parameter: Reference to render window
+********************/
 void menuScene::MainLoop(sf::RenderWindow& _window)
 {
     LoadTextures();
@@ -90,6 +110,11 @@ void menuScene::MainLoop(sf::RenderWindow& _window)
     }
 }
 
+/***********************
+* Update: Updates all menu objects
+* @author: William de Beer
+* @parameter: Delta time and Reference to render window
+********************/
 void menuScene::Update(sf::RenderWindow& _window, float _dT)
 {
     for (auto i : m_Buttons)
@@ -101,6 +126,11 @@ void menuScene::Update(sf::RenderWindow& _window, float _dT)
     }
 }
 
+/***********************
+* Render: Render all objects in menu.
+* @author: William de Beer
+* @parameter: Reference to render window
+********************/
 void menuScene::Render(sf::RenderWindow& _window)
 {
     _window.clear(sf::Color(228, 228, 228));
@@ -114,6 +144,10 @@ void menuScene::Render(sf::RenderWindow& _window)
     _window.display();
 }
 
+/***********************
+* LoadTextures: Loads all texture use in menu from files.
+* @author: William de Beer
+********************/
 void menuScene::LoadTextures()
 {
     m_MenuBGTexture = new sf::Texture();
