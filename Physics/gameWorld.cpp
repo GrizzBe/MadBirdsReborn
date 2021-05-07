@@ -137,7 +137,7 @@ gameWorld::~gameWorld()
 * @author: William de Beer
 * @parameter: Reference to render window
 ********************/
-void gameWorld::MainLoop(sf::RenderWindow& _window)
+void gameWorld::MainLoop(sf::RenderWindow& _window) // Warning is a non-issue.
 {
     float timeStep = 1.0f / 60.0f;
     int32 velIter = 6;

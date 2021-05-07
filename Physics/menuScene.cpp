@@ -18,6 +18,7 @@
  // Implementation 
 menuScene::menuScene()
 {
+    m_MenuBG = 0;
     m_MenuBGTexture  = 0;
     m_Button1Texture = 0;
     m_Button2Texture = 0;
