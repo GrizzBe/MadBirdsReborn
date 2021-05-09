@@ -59,7 +59,7 @@ void birdSpin::Update(float _dT)
 		m_SpinTimer += _dT;
 		if (m_SpinTimer >= 0.5f)
 		{
-			m_Body->ApplyTorque(-500.0f * _dT, true); // Apply spin
+			m_Body->ApplyTorque(-750.0f * _dT, true); // Apply spin
 		}
 		if (m_SpinTimer >= 3.0f)
 		{

@@ -89,7 +89,7 @@ void menuScene::MainLoop(sf::RenderWindow& _window)
 
     m_Buttons.push_back(new button(m_Button1Texture, sf::Vector2f(600, 275), true, buttonFunction::level1));
     m_Buttons.push_back(new button(m_Button2Texture, sf::Vector2f(600, 375), true, buttonFunction::level2));
-    m_Buttons.push_back(new button(m_Button3Texture, sf::Vector2f(600, 475), false, buttonFunction::level3));
+    m_Buttons.push_back(new button(m_Button3Texture, sf::Vector2f(600, 475), true, buttonFunction::level3));
     m_Buttons.push_back(new button(m_Button4Texture, sf::Vector2f(600, 575), false, buttonFunction::level4));
     m_Buttons.push_back(new button(m_ButtonQTexture, sf::Vector2f(600, 700), true, buttonFunction::quitGame));
 

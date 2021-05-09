@@ -19,6 +19,7 @@
  // Local Includes 
 #include "scene1.h"
 #include "scene2.h"
+#include "scene3.h"
  // Implementation 
 enum class buttonFunction
 {

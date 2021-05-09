@@ -391,7 +391,7 @@ void gameWorld::AddBird(birdType _type, b2World& _world)
 {
     // Offset constant
     float xBirdOffset = 1.75f;
-    float yBirdOffset = 17.5f;
+    float yBirdOffset = 15.5f;
 
     // Set spawn position based on how many birds are already in scene
     b2Vec2 spawnPos(xBirdOffset + m_Birds.size() * 1.5f, yBirdOffset);

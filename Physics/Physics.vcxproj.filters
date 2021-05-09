@@ -96,6 +96,9 @@
     <ClInclude Include="seesaw.h">
       <Filter>Header Files\joints</Filter>
     </ClInclude>
+    <ClInclude Include="scene3.h">
+      <Filter>Header Files\levels</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <Filter Include="Header Files">

@@ -49,6 +49,7 @@
     <ClInclude Include="prismatic.h" />
     <ClInclude Include="scene1.h" />
     <ClInclude Include="scene2.h" />
+    <ClInclude Include="scene3.h" />
     <ClInclude Include="seesaw.h" />
     <ClInclude Include="Utilities.h" />
     <ClInclude Include="victim.h" />

@@ -81,7 +81,8 @@ void button::Activate(sf::RenderWindow& _window)
 		gW->MainLoop(_window);
 		break;
 	case buttonFunction::level3: // Level 3
-		std::cout << "Level does not exist." << std::endl;
+		gW = new scene3();
+		gW->MainLoop(_window);
 		break;
 	case buttonFunction::level4: // Level 4
 		std::cout << "Level does not exist." << std::endl;
