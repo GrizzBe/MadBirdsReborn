@@ -53,6 +53,12 @@ void birdQue::Update(float _dT)
 			float height = 0.5f * m_Sprite->getTexture()->getSize().y * m_Sprite->getScale().y;
 			newBox->SetAsBox(width * Utilities::MPP, height * Utilities::MPP);
 
+			if (m_FixtureDef != nullptr)
+			{
+				delete m_FixtureDef;
+				m_FixtureDef = 0;
+			}
+
 			m_FixtureDef = new b2FixtureDef();
 			m_FixtureDef->shape = newBox;
 			m_FixtureDef->density = 100.0f;
@@ -67,6 +73,9 @@ void birdQue::Update(float _dT)
 
 			// Slam forwards and downwards.
 			m_Body->SetLinearVelocity(b2Vec2(15.0f, 15.0f));
+
+			delete newBox;
+			newBox = 0;
 		}
 	}
 }

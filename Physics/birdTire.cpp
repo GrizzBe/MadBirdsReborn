@@ -59,6 +59,12 @@ void birdTire::Update(float _dT)
 		newCircle->m_p.Set(0.0f, 0.0f);
 		newCircle->m_radius = radius * Utilities::MPP;
 
+		if (m_FixtureDef != nullptr)
+		{
+			delete m_FixtureDef;
+			m_FixtureDef = 0;
+		}
+
 		m_FixtureDef = new b2FixtureDef();
 		m_FixtureDef->shape = newCircle;
 		m_FixtureDef->density = 1.0f;
@@ -71,6 +77,9 @@ void birdTire::Update(float _dT)
 		}
 
 		m_Body->CreateFixture(m_FixtureDef);
+
+		delete newCircle;
+		newCircle = 0;
 	}
 }
 

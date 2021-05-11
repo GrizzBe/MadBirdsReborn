@@ -26,6 +26,7 @@
     <ClCompile Include="button.cpp" />
     <ClCompile Include="Chain.cpp" />
     <ClCompile Include="ContactListener.cpp" />
+    <ClCompile Include="distance.cpp" />
     <ClCompile Include="gameObject.cpp" />
     <ClCompile Include="gameWorld.cpp" />
     <ClCompile Include="main.cpp" />
@@ -43,6 +44,7 @@
     <ClInclude Include="button.h" />
     <ClInclude Include="Chain.h" />
     <ClInclude Include="ContactListener.h" />
+    <ClInclude Include="distance.h" />
     <ClInclude Include="gameObject.h" />
     <ClInclude Include="gameWorld.h" />
     <ClInclude Include="menuScene.h" />

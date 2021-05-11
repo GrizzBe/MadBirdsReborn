@@ -46,6 +46,9 @@
     <ClCompile Include="seesaw.cpp">
       <Filter>Source Files\joints</Filter>
     </ClCompile>
+    <ClCompile Include="distance.cpp">
+      <Filter>Source Files\joints</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="ContactListener.h">
@@ -98,6 +101,9 @@
     </ClInclude>
     <ClInclude Include="scene3.h">
       <Filter>Header Files\levels</Filter>
+    </ClInclude>
+    <ClInclude Include="distance.h">
+      <Filter>Header Files\joints</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

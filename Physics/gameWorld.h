@@ -25,6 +25,7 @@
 #include "birdSpin.h"
 #include "birdQue.h"
 #include "Chain.h"
+#include "distance.h"
 #include "seesaw.h"
 #include "prismatic.h"
 #include "victim.h"
@@ -43,9 +44,10 @@ public:
 	gameWorld();
 	virtual ~gameWorld();
 
-	virtual void MainLoop(sf::RenderWindow& _window);
+	virtual bool MainLoop(sf::RenderWindow& _window);
 	virtual void Update(float _dT);
 	virtual void Render(sf::RenderWindow& _window);
+	virtual bool RestartCheck(float _dT, b2World& _world);
 	virtual void LoadTextures();
 	virtual void AddBird(birdType _type, b2World& _world);
 	virtual void DestroyBox2DObjects();
@@ -54,9 +56,14 @@ public:
 
 	virtual void GenerateLevel(b2World& _world);
 protected:
-	sf::Sprite* m_AimingArrow;
+	// Restart check
+	bool m_bShowMessage;
+	bool m_bWinning;
+	float m_fFinishedTimer;
+	sf::Sprite* m_WinLossMessage;
 
-	//Bird launching variables
+	// Bird launching variables
+	sf::Sprite* m_AimingArrow;
 	bool m_bPullFlag;
 	sf::Vector2i m_DragOrigin;
 	float m_fForceMult;
@@ -76,8 +83,12 @@ protected:
 	Chain* m_Chain1;
 	seesaw* m_Seesaw1;
 	prismatic* m_Prismatic1;
+	distance* m_Distance1;
 
 	// Textures
+	sf::Texture* m_WinTexture;
+	sf::Texture* m_LossTexture;
+
 	sf::Texture* m_BirdTexture;
 	sf::Texture* m_BirdTireTexture;
 	sf::Texture* m_BirdSpinTexture;

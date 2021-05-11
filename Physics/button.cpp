@@ -69,20 +69,39 @@ bool button::IsMouseIntersecting(sf::RenderWindow& _window)
 ********************/
 void button::Activate(sf::RenderWindow& _window)
 {
+	bool resetGame = true;
 	gameWorld* gW = nullptr;
 	switch (m_Function)
 	{
 	case buttonFunction::level1: // Level 1
-		gW = new scene1(); 
-		gW->MainLoop(_window);
+		while (resetGame)
+		{
+			gW = new scene1();
+			resetGame = !gW->MainLoop(_window);
+
+			delete gW;
+			gW = 0;
+		}
 		break;
 	case buttonFunction::level2: // Level 2
-		gW = new scene2();
-		gW->MainLoop(_window);
+		while (resetGame)
+		{
+			gW = new scene2();
+			resetGame = !gW->MainLoop(_window);
+
+			delete gW;
+			gW = 0;
+		}
 		break;
 	case buttonFunction::level3: // Level 3
-		gW = new scene3();
-		gW->MainLoop(_window);
+		while (resetGame)
+		{
+			gW = new scene3();
+			resetGame = !gW->MainLoop(_window);
+
+			delete gW;
+			gW = 0;
+		}
 		break;
 	case buttonFunction::level4: // Level 4
 		std::cout << "Level does not exist." << std::endl;
@@ -93,12 +112,6 @@ void button::Activate(sf::RenderWindow& _window)
 	default:
 		std::cout << "Error actiavting button function." << std::endl;
 		break;
-	}
-
-	if (gW != nullptr)
-	{
-		delete gW;
-		gW = 0;
 	}
 }
 

@@ -31,19 +31,17 @@ public:
     virtual void GenerateLevel(b2World& _world)
     {
         // Add birds in
-        AddBird(birdType::basicBird, _world);
-        AddBird(birdType::basicBird, _world);
-        AddBird(birdType::spinBird, _world);
         AddBird(birdType::spinBird, _world);
         AddBird(birdType::tireBird, _world);
         AddBird(birdType::tireBird, _world);
-        AddBird(birdType::queBird, _world);
         AddBird(birdType::queBird, _world);
 
         gameWorld::GenerateLevel(_world);
 
-        float xBuildingOffset = 20.0f;
+        float xBuildingOffset = 17.0f;
         float yBuildingOffset = 4.5f;
+
+        m_Distance1 = new distance(b2Vec2(9.0f + xBuildingOffset, yBuildingOffset + 9.0f), sf::Vector2f(2.0f, 2.0f), m_WeightTexture, m_RailTexture, m_StrongBlockTexture, &_world);
 
         // Layer 1
         {

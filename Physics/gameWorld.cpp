@@ -125,10 +125,28 @@ gameWorld::~gameWorld()
         delete m_ArrowTexture;
         m_ArrowTexture = 0;
     }
+
     if (m_AimingArrow != nullptr)
     {
         delete m_AimingArrow;
         m_AimingArrow = 0;
+    }
+
+
+    if (m_WinTexture != nullptr)
+    {
+        delete m_WinTexture;
+        m_WinTexture = 0;
+    }
+    if (m_LossTexture != nullptr)
+    {
+        delete m_LossTexture;
+        m_LossTexture = 0;
+    }
+    if (m_WinLossMessage != nullptr)
+    {
+        delete m_WinLossMessage;
+        m_WinLossMessage = 0;
     }
 }
 
@@ -137,7 +155,7 @@ gameWorld::~gameWorld()
 * @author: William de Beer
 * @parameter: Reference to render window
 ********************/
-void gameWorld::MainLoop(sf::RenderWindow& _window) // Warning is a non-issue.
+bool gameWorld::MainLoop(sf::RenderWindow& _window) // Warning is a non-issue.
 {
     float timeStep = 1.0f / 60.0f;
     int32 velIter = 6;
@@ -155,9 +173,14 @@ void gameWorld::MainLoop(sf::RenderWindow& _window) // Warning is a non-issue.
     // Generate level
     GenerateLevel(m_World);
     
+    m_bWinning = false;
+    m_fFinishedTimer = 0;
+    m_WinLossMessage = new sf::Sprite(*m_LossTexture);
+    m_WinLossMessage->setOrigin((sf::Vector2f)m_WinLossMessage->getTexture()->getSize() / 2.0f);
+    m_WinLossMessage->setPosition(600, 150);
+
     sf::Clock clock;
-    float LevelEndTimer = 0;
-    while (_window.isOpen() && !sf::Keyboard::isKeyPressed(sf::Keyboard::Q))
+    while (_window.isOpen())
     {
         // Delta time update
         float deltaTime = clock.getElapsedTime().asSeconds();
@@ -174,8 +197,32 @@ void gameWorld::MainLoop(sf::RenderWindow& _window) // Warning is a non-issue.
         m_World.Step(timeStep, velIter, posIter);
         Update(deltaTime);
         Render(_window);
+
+        float totalBirdVelocity = 0;
+        for (auto i : m_Birds)
+        {
+            totalBirdVelocity += i->GetBody()->GetLinearVelocity().Length();
+        }
+
+        if (m_Victims.size() == 0 || (m_SelectedBird == nullptr && totalBirdVelocity < 3.0f))
+        {
+            if (RestartCheck(deltaTime, m_World))
+                break;
+        }
+        else
+        {
+            m_fFinishedTimer = 0;
+        }
+
+        if (sf::Keyboard::isKeyPressed(sf::Keyboard::Q))
+        {
+            m_bWinning = true;
+            break;
+        }
     }
     DestroyBox2DObjects();
+
+    return m_bWinning;
 }
 
 /***********************
@@ -236,6 +283,9 @@ void gameWorld::Update(float _dT)
 
     if (m_Prismatic1 != nullptr)
         m_Prismatic1->Update(_dT);
+
+    if (m_Distance1 != nullptr)
+        m_Distance1->Update(_dT);
 }
 
 /***********************
@@ -256,6 +306,9 @@ void gameWorld::Render(sf::RenderWindow& _window)
 
     if (m_Prismatic1 != nullptr)
         m_Prismatic1->Draw(_window);
+
+    if (m_Distance1 != nullptr)
+        m_Distance1->Draw(_window);
 
     // Draw blocks
     for (auto i : m_Blocks)
@@ -288,7 +341,48 @@ void gameWorld::Render(sf::RenderWindow& _window)
     {
         _window.draw(*m_AimingArrow);
     }
+    // Draw game state
+    if (m_bShowMessage)
+    {
+        _window.draw(*m_WinLossMessage);
+    }
+
     _window.display();
+}
+
+/***********************
+* RestartCheck: Checks if game start to determine if it should restart.
+* @author: William de Beer
+* @parameter: Delta time, Reference to world.
+* @return: Boolean.
+********************/
+bool gameWorld::RestartCheck(float _dT, b2World& _world)
+{
+    // Add to timer
+    m_fFinishedTimer += _dT;
+    if (m_Victims.size() == 0) // Win conditions
+    {
+        // Set sprite
+        if (m_bWinning != true)
+            m_WinLossMessage->setTexture(*m_WinTexture);
+        m_bWinning = true;
+    }
+    else if (m_SelectedBird == nullptr) // Loss conditions
+    {
+        // Set sprite
+        if (m_bWinning != false)
+            m_WinLossMessage->setTexture(*m_LossTexture);
+        m_bWinning = false;
+    }
+    if (m_fFinishedTimer > 5.0f) // Show message after delay
+    {
+        m_bShowMessage = true;
+    }
+    if (m_fFinishedTimer > 8.0f) // End scene
+    {
+        return true;
+    }
+    return false;
 }
 
 /***********************
@@ -380,6 +474,18 @@ void gameWorld::LoadTextures()
     {
         std::cout << "Texture not loaded" << std::endl;
     }
+
+    m_WinTexture = new sf::Texture();
+    if (!m_WinTexture->loadFromFile("Assets/WinMessage.png"))
+    {
+        std::cout << "Texture not loaded" << std::endl;
+    }
+
+    m_LossTexture = new sf::Texture();
+    if (!m_LossTexture->loadFromFile("Assets/LossMessage.png"))
+    {
+        std::cout << "Texture not loaded" << std::endl;
+    }
 }
 
 /***********************
@@ -437,6 +543,11 @@ void gameWorld::DestroyBox2DObjects()
     {
         delete m_Prismatic1;
         m_Prismatic1 = 0;
+    }
+    if (m_Distance1 != nullptr)
+    {
+        delete m_Distance1;
+        m_Distance1 = 0;
     }
 
     std::vector<bird*>::iterator b_it = m_Birds.begin();

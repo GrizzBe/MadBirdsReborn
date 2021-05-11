@@ -17,7 +17,7 @@
 seesaw::seesaw(b2Vec2 _pos, sf::Vector2f _scale, sf::Texture* _texture, sf::Texture* _pivotTexture, b2World* _world, bool _destructable)
 {
 	// Create pivot
-	m_Ground = new gameObject(_pos, sf::Vector2f(1.0f, 1.0f), 0.0f, _texture, b2_staticBody, _world, 2, false);
+	m_Ground = new gameObject(_pos, sf::Vector2f(1.0f, 1.0f), 0.0f, _pivotTexture, b2_staticBody, _world, 2, false);
 	// Create plank
 	m_Object = new gameObject(_pos, _scale, 0.0f, _texture, b2_dynamicBody, _world, 1, false);
 
@@ -59,6 +59,6 @@ void seesaw::Update(float _dT)
 ********************/
 void seesaw::Draw(sf::RenderWindow& _window)
 {
-	_window.draw(*m_Ground->GetSprite());
 	_window.draw(*m_Object->GetSprite());
+	_window.draw(*m_Ground->GetSprite());
 }

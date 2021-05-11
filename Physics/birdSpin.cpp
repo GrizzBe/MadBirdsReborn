@@ -27,7 +27,7 @@ birdSpin::birdSpin(b2Vec2 _pos, sf::Vector2f _scale, float _rotation, sf::Textur
 	m_FixtureDef = new b2FixtureDef();
 	m_FixtureDef->shape = &newCircle;
 	m_FixtureDef->density = 1.0f;
-	m_FixtureDef->friction = 1.0f;
+	m_FixtureDef->friction = 10.0f;
 	m_FixtureDef->restitution = 0.05f;
 
 	if (m_FixtureDef != nullptr)
