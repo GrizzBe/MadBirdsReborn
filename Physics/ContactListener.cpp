@@ -64,7 +64,7 @@ void ContactListener::PreSolve(b2Contact* contact, const b2Manifold* oldManifold
         {
             // Disable contact if either object is destroyed
             contact->SetEnabled(false);
-            float slowMult = 0.6f;
+            float slowMult = 0.8f;
 
             // Slow velocity
             if (!objA->GetLethal()) 

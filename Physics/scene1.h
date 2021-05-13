@@ -44,12 +44,11 @@ public:
         float xBuildingOffset = 26.0f;
         float yBuildingOffset = 18.0f;
         // Initialise seesaw
-        m_Seesaw1 = new seesaw(b2Vec2(-4.0f + xBuildingOffset, 2.5f + yBuildingOffset), sf::Vector2f(10.0f, 1.0f), m_SeesawTexture, m_ChainTexture, &_world, false);
+        m_Seesaw1 = new seesaw(b2Vec2(-4.0f + xBuildingOffset, 2.5f + yBuildingOffset), sf::Vector2f(10.0f, 1.0f), m_SeesawTexture, m_PivotTexture, &_world, false);
 
         // Wall 1
         m_Blocks.push_back(new gameObject(b2Vec2(0.0f + xBuildingOffset, -1.0f + yBuildingOffset), sf::Vector2f(1.0f, 1.0f), 0.0f, m_StrongBlockTexture, b2_dynamicBody, &_world, 1, false));
         m_Blocks.push_back(new gameObject(b2Vec2(0.0f + xBuildingOffset, 1.0f + yBuildingOffset), sf::Vector2f(1.0f, 1.0f), 0.0f, m_WeakBlockTexture, b2_dynamicBody, &_world, 1, true));
-        //m_Blocks.push_back(new gameObject(b2Vec2(0.0f + xBuildingOffset, 2.0f + yBuildingOffset), sf::Vector2f(1.0f, 1.0f), 0.0f, m_WeakBlockTexture, b2_dynamicBody, &_world, 1, true));
         m_Blocks.push_back(new gameObject(b2Vec2(0.0f + xBuildingOffset, 3.0f + yBuildingOffset), sf::Vector2f(1.0f, 1.0f), 0.0f, m_WeakBlockTexture, b2_dynamicBody, &_world, 1, true));
         m_Blocks.push_back(new gameObject(b2Vec2(0.0f + xBuildingOffset, 4.0f + yBuildingOffset), sf::Vector2f(1.0f, 1.0f), 0.0f, m_WeakBlockTexture, b2_dynamicBody, &_world, 1, true));
         m_Blocks.push_back(new gameObject(b2Vec2(0.0f + xBuildingOffset, 5.0f + yBuildingOffset), sf::Vector2f(1.0f, 1.0f), 0.0f, m_WeakBlockTexture, b2_dynamicBody, &_world, 1, true));

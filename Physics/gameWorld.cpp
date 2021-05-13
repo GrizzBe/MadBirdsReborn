@@ -125,6 +125,11 @@ gameWorld::~gameWorld()
         delete m_ArrowTexture;
         m_ArrowTexture = 0;
     }
+	if (m_PivotTexture != nullptr)
+	{
+		delete m_PivotTexture;
+		m_PivotTexture = 0;
+	}
 
     if (m_AimingArrow != nullptr)
     {
@@ -480,12 +485,18 @@ void gameWorld::LoadTextures()
     {
         std::cout << "Texture not loaded" << std::endl;
     }
-
+	
     m_LossTexture = new sf::Texture();
     if (!m_LossTexture->loadFromFile("Assets/LossMessage.png"))
     {
         std::cout << "Texture not loaded" << std::endl;
     }
+
+	m_PivotTexture = new sf::Texture();
+	if (!m_PivotTexture->loadFromFile("Assets/JointPivot.png"))
+	{
+		std::cout << "Texture not loaded" << std::endl;
+	}
 }
 
 /***********************

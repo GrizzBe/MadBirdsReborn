@@ -106,6 +106,7 @@ protected:
 	sf::Texture* m_WeightTexture;
 	sf::Texture* m_RailTexture;
 	sf::Texture* m_ChainTexture;
+	sf::Texture* m_PivotTexture;
 
 	sf::Texture* m_ArrowTexture;
 };

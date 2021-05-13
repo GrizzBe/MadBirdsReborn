@@ -31,10 +31,10 @@ public:
     virtual void GenerateLevel(b2World& _world)
     {
         // Add birds in
+        AddBird(birdType::basicBird, _world);
         AddBird(birdType::tireBird, _world);
         AddBird(birdType::tireBird, _world);
-        AddBird(birdType::basicBird, _world);
-        AddBird(birdType::basicBird, _world);
+        AddBird(birdType::tireBird, _world);
 
         gameWorld::GenerateLevel(_world);
 

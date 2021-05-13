@@ -41,7 +41,7 @@ public:
         float xBuildingOffset = 17.0f;
         float yBuildingOffset = 4.5f;
 
-        m_Distance1 = new distance(b2Vec2(9.0f + xBuildingOffset, yBuildingOffset + 9.0f), sf::Vector2f(2.0f, 2.0f), m_WeightTexture, m_RailTexture, m_StrongBlockTexture, &_world);
+        m_Distance1 = new distance(b2Vec2(9.0f + xBuildingOffset, yBuildingOffset + 9.0f), sf::Vector2f(2.0f, 2.0f), m_WeightTexture, m_RailTexture, m_PivotTexture, &_world);
 
         // Layer 1
         {

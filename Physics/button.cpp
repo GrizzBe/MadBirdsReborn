@@ -69,50 +69,39 @@ bool button::IsMouseIntersecting(sf::RenderWindow& _window)
 ********************/
 void button::Activate(sf::RenderWindow& _window)
 {
-	bool resetGame = true;
+	bool resetGame = false;
 	gameWorld* gW = nullptr;
-	switch (m_Function)
+
+	do // Loop will only end if game is not set to be reset 
 	{
-	case buttonFunction::level1: // Level 1
-		while (resetGame)
+		switch (m_Function)
 		{
+		case buttonFunction::level1: // Level 1
 			gW = new scene1();
-			resetGame = !gW->MainLoop(_window);
-
-			delete gW;
-			gW = 0;
-		}
-		break;
-	case buttonFunction::level2: // Level 2
-		while (resetGame)
-		{
+			break;
+		case buttonFunction::level2: // Level 2
 			gW = new scene2();
-			resetGame = !gW->MainLoop(_window);
-
-			delete gW;
-			gW = 0;
-		}
-		break;
-	case buttonFunction::level3: // Level 3
-		while (resetGame)
-		{
+			break;
+		case buttonFunction::level3: // Level 3
 			gW = new scene3();
+			break;
+		case buttonFunction::level4: // Level 4
+			std::cout << "Level does not exist." << std::endl;
+			break;
+		case buttonFunction::quitGame: // Quit game
+			_window.close();
+			break;
+		default:
+			std::cout << "Error actiavting button function." << std::endl;
+			break;
+		}
+		if (gW != nullptr)
+		{
 			resetGame = !gW->MainLoop(_window);
-
 			delete gW;
 			gW = 0;
 		}
-		break;
-	case buttonFunction::level4: // Level 4
-		std::cout << "Level does not exist." << std::endl;
-		break;
-	case buttonFunction::quitGame: // Quit game
-		_window.close();
-		break;
-	default:
-		std::cout << "Error actiavting button function." << std::endl;
-		break;
-	}
+	} while (resetGame);
 }
 
 /***********************

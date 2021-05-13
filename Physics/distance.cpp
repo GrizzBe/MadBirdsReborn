@@ -9,9 +9,8 @@ distance::distance(b2Vec2 _pos, sf::Vector2f _scale, sf::Texture* _texture, sf::
 	m_Object->SetLethal(true);
 
 	// Create joint
-	b2DistanceJointDef djd;
+	b2DistanceJointDef djd; //<- nice name, gamer
 	djd.Initialize(m_Ground->GetBody(), m_Object->GetBody(), m_Ground->GetBody()->GetPosition(), m_Object->GetBody()->GetPosition());
-
 
 	m_Beam = new sf::Sprite(*_railTexture);
 	m_Beam->setPosition(_pos.x * Utilities::PPM, _pos.y * Utilities::PPM);
