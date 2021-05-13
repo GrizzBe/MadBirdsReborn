@@ -1,0 +1,141 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <ClCompile Include="ContactListener.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="gameObject.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="main.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Utilities.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="victim.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="bird.cpp">
+      <Filter>Source Files\birds</Filter>
+    </ClCompile>
+    <ClCompile Include="birdQue.cpp">
+      <Filter>Source Files\birds</Filter>
+    </ClCompile>
+    <ClCompile Include="birdSpin.cpp">
+      <Filter>Source Files\birds</Filter>
+    </ClCompile>
+    <ClCompile Include="birdTire.cpp">
+      <Filter>Source Files\birds</Filter>
+    </ClCompile>
+    <ClCompile Include="button.cpp">
+      <Filter>Source Files\menu</Filter>
+    </ClCompile>
+    <ClCompile Include="menuScene.cpp">
+      <Filter>Source Files\menu</Filter>
+    </ClCompile>
+    <ClCompile Include="gameWorld.cpp">
+      <Filter>Source Files\levels</Filter>
+    </ClCompile>
+    <ClCompile Include="Chain.cpp">
+      <Filter>Source Files\joints</Filter>
+    </ClCompile>
+    <ClCompile Include="prismatic.cpp">
+      <Filter>Source Files\joints</Filter>
+    </ClCompile>
+    <ClCompile Include="seesaw.cpp">
+      <Filter>Source Files\joints</Filter>
+    </ClCompile>
+    <ClCompile Include="distance.cpp">
+      <Filter>Source Files\joints</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="ContactListener.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="gameObject.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Utilities.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="victim.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="bird.h">
+      <Filter>Header Files\birds</Filter>
+    </ClInclude>
+    <ClInclude Include="birdQue.h">
+      <Filter>Header Files\birds</Filter>
+    </ClInclude>
+    <ClInclude Include="birdSpin.h">
+      <Filter>Header Files\birds</Filter>
+    </ClInclude>
+    <ClInclude Include="birdTire.h">
+      <Filter>Header Files\birds</Filter>
+    </ClInclude>
+    <ClInclude Include="menuScene.h">
+      <Filter>Header Files\menu</Filter>
+    </ClInclude>
+    <ClInclude Include="button.h">
+      <Filter>Header Files\menu</Filter>
+    </ClInclude>
+    <ClInclude Include="Chain.h">
+      <Filter>Header Files\joints</Filter>
+    </ClInclude>
+    <ClInclude Include="scene1.h">
+      <Filter>Header Files\levels</Filter>
+    </ClInclude>
+    <ClInclude Include="scene2.h">
+      <Filter>Header Files\levels</Filter>
+    </ClInclude>
+    <ClInclude Include="gameWorld.h">
+      <Filter>Header Files\levels</Filter>
+    </ClInclude>
+    <ClInclude Include="prismatic.h">
+      <Filter>Header Files\joints</Filter>
+    </ClInclude>
+    <ClInclude Include="seesaw.h">
+      <Filter>Header Files\joints</Filter>
+    </ClInclude>
+    <ClInclude Include="scene3.h">
+      <Filter>Header Files\levels</Filter>
+    </ClInclude>
+    <ClInclude Include="distance.h">
+      <Filter>Header Files\joints</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <Filter Include="Header Files">
+      <UniqueIdentifier>{2e8abc1e-92e6-4a65-ae6b-9bb193efaf21}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files">
+      <UniqueIdentifier>{baf30178-0a43-45ee-b318-c93617b6c116}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\birds">
+      <UniqueIdentifier>{b9500e04-ea60-4a27-b72e-ced6bfa087f1}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\menu">
+      <UniqueIdentifier>{6485f2a3-ed87-47a0-b640-28ad6e06abd6}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\joints">
+      <UniqueIdentifier>{d61b626e-a66d-4034-951d-31e11d6dbc84}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\levels">
+      <UniqueIdentifier>{eb41e32a-e9bc-4433-a8cc-cd8707fd8a5d}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\birds">
+      <UniqueIdentifier>{69c2f057-5765-404d-b676-72d9387420f2}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\joints">
+      <UniqueIdentifier>{6e7be653-391f-4a19-9a7b-91c9846e256b}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\levels">
+      <UniqueIdentifier>{93eadf98-4f82-4e1a-a50b-47dc73a98e9a}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\menu">
+      <UniqueIdentifier>{74d40c18-6cb3-4782-8221-a42a48eae795}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+</Project>
